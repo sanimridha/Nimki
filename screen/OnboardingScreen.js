@@ -1,14 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import Onboarding from 'react-native-onboarding-swiper';
 
 const OnboardingScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>Onboarding Screen</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={{color: 'red'}}>Click Here</Text>
-      </TouchableOpacity>
-    </View>
+    <Onboarding
+      pages={[
+        {
+          backgroundColor: '#000',
+          image: <Image source={require('../assets/images/sa.png')} />,
+          title: 'Onboarding',
+          subtitle: 'Done with React Native Onboarding Swiper',
+        },
+        {
+          backgroundColor: '#fff',
+          image: <Image source={require('../assets/images/sa.png')} />,
+          title: 'Onboarding',
+          subtitle: 'Done with React Native Onboarding Swiper',
+        },
+        {
+          backgroundColor: '#F05454',
+          image: <Image source={require('../assets/images/sa.png')} />,
+          title: 'Onboarding',
+          subtitle: 'Done with React Native Onboarding Swiper',
+        },
+      ]}
+    />
   );
 };
 

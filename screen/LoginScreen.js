@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, Image, View} from 'react-native';
+import FormInput from '../components/FormInput';
 
 const LogInScreen = () => {
   return (
@@ -9,6 +10,7 @@ const LogInScreen = () => {
         resizeMode="contain"
         style={styles.logo}
       />
+      <FormInput placeholderText="Email" iconType="adduser" />
     </View>
   );
 };

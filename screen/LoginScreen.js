@@ -3,6 +3,7 @@ import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 import FormInput from '../components/FormInput';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Formbutton from '../components/FormButton';
+import SocialButton from '../components/SocialButton';
 
 const LogInScreen = ({navigation}) => {
   const [email, setEmail] = useState();
@@ -38,6 +39,14 @@ const LogInScreen = ({navigation}) => {
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
+      <SocialButton
+        buttonTitle="Sign in with Facebook"
+        btnType="facebook"
+        color="#4867aa"
+        backgroundColor="#e6eaf4"
+        onPress={() => {}}
+      />
+
       <TouchableOpacity
         style={styles.forgotButton}
         onPress={() => {

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, Image, View} from 'react-native';
 import FormInput from '../components/FormInput';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const LogInScreen = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <View style={styles.container}>
       <Image
@@ -11,7 +14,15 @@ const LogInScreen = () => {
         resizeMode="contain"
         style={styles.logo}
       />
-      <FormInput placeholderText="Email" iconType="user" />
+      <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
     </View>
   );
 };

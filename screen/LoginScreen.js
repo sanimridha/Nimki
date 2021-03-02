@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, Image, View} from 'react-native';
 import FormInput from '../components/FormInput';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const LogInScreen = () => {
   return (
@@ -10,7 +11,7 @@ const LogInScreen = () => {
         resizeMode="contain"
         style={styles.logo}
       />
-      <FormInput placeholderText="Email" iconType="adduser" />
+      <FormInput placeholderText="Email" iconType="user" />
     </View>
   );
 };

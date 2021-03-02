@@ -37,12 +37,14 @@ const LogInScreen = ({navigation}) => {
           By registering, you confirm that you accept our{' '}
         </Text>
         <TouchableOpacity>
-          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
+          <Text
+            style={[styles.color_textPrivate, {color: '#e88832'}]}
+            onPress={() => alert('Terms pressed')}>
             Terms and services
           </Text>
         </TouchableOpacity>
         <Text style={styles.color_textPrivate}> and </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => alert('privacy pressed')}>
           <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
             Privacy Policy
           </Text>

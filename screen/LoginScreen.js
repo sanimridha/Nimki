@@ -46,7 +46,13 @@ const LogInScreen = ({navigation}) => {
         backgroundColor="#e6eaf4"
         onPress={() => {}}
       />
-
+      <SocialButton
+        buttonTitle="Sign in with Google"
+        btnType="google"
+        color="#de4d41"
+        backgroundColor="#f5e7ea"
+        onPress={() => {}}
+      />
       <TouchableOpacity
         style={styles.forgotButton}
         onPress={() => {

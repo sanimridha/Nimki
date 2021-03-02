@@ -29,7 +29,7 @@ const LogInScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="password"
+        placeholderText="Password"
         iconType="lock"
         secureTextEntry={true}
       />

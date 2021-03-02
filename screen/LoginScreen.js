@@ -23,6 +23,13 @@ const LogInScreen = () => {
         autoCapitalize="none"
         autoCorrect={false}
       />
+      <FormInput
+        labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholderText="password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
     </View>
   );
 };

@@ -16,6 +16,7 @@ const LogInScreen = ({navigation}) => {
         resizeMode="contain"
         style={styles.logo}
       />
+      <Text style={{fontFamily: 'Kufam-SemiBoldItalic'}}>Hey there R</Text>
       <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}

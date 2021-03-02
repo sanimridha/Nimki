@@ -73,13 +73,11 @@ const LogInScreen = ({navigation}) => {
         onPress={() => {}}
       />
       <TouchableOpacity
-        style={styles.forgotButton}
+        style={styles.navButton}
         onPress={() => {
-          navigation.navigate('Signup');
+          navigation.navigate('Login');
         }}>
-        <Text style={styles.navButtonText}>
-          Don't have an account? Create Here
-        </Text>
+        <Text style={styles.navButtonText}>Have an account? Sign In</Text>
       </TouchableOpacity>
     </View>
   );

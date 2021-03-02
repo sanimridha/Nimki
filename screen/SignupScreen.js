@@ -8,6 +8,7 @@ import SocialButton from '../components/SocialButton';
 const LogInScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [ConfirmPassword, setConfirmPassword] = useState();
 
   return (
     <View style={styles.container}>
@@ -25,6 +26,13 @@ const LogInScreen = ({navigation}) => {
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
         placeholderText="password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
+      <FormInput
+        labelValue={ConfirmPassword}
+        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+        placeholderText="Confirm Password"
         iconType="lock"
         secureTextEntry={true}
       />

@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import OnboardingScreen from '../screen/OnboardingScreen';
 import LoginScreen from '../screen/LoginScreen';
 import SignupScreen from '../screen/SignupScreen';
+import {View} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 const AuthStack = () => {
@@ -43,7 +45,25 @@ const AuthStack = () => {
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
-        options={{header: () => null}}
+        options={({navigation}) => ({
+          title: '',
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            shadowColor: '#F2F2F2',
+            elevation: 0,
+          },
+          headerLeft: () => (
+            <View style={{marginLeft: 10}}>
+              <FontAwesome.Button
+                name="long-arrow-left"
+                size={25}
+                backgroundColor="#F2F2F2"
+                color="#333"
+                onPress={() => navigation.navigate('Login')}
+              />
+            </View>
+          ),
+        })}
       />
     </Stack.Navigator>
   );

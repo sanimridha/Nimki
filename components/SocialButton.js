@@ -23,7 +23,7 @@ const SocialButton = ({
           style={styles.icon}
         />
       </View>
-      <View>
+      <View style={styles.btnTxtWrapper}>
         <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
       </View>
     </TouchableOpacity>

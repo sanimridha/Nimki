@@ -16,7 +16,7 @@ const LogInScreen = ({navigation}) => {
         resizeMode="contain"
         style={styles.logo}
       />
-      <Text style={{fontFamily: 'Kufam-SemiBoldItalic'}}>Hey there R</Text>
+      {/* <Text style={styles.text}>Connect With Your Friends</Text> */}
       <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Kufam-SemiBoldItalic',
     fontSize: 28,
     marginBottom: 10,
-    color: '#051d5f',
+    color: '#38C6AA',
   },
   navButton: {
     marginTop: 15,

@@ -32,14 +32,20 @@ const LogInScreen = ({navigation}) => {
         buttonTitle="sign up"
         onPress={() => alert('sign up clicked!')}
       />
-      <View>
-        <Text>By registering, you confirm that you accept our </Text>
+      <View style={styles.textPrivate}>
+        <Text style={styles.color_textPrivate}>
+          By registering, you confirm that you accept our{' '}
+        </Text>
         <TouchableOpacity>
-          <Text>Terms and services</Text>
+          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
+            Terms and services
+          </Text>
         </TouchableOpacity>
-        <Text> and </Text>
+        <Text style={styles.color_textPrivate}> and </Text>
         <TouchableOpacity>
-          <Text>Privacy Policy</Text>
+          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
+            Privacy Policy
+          </Text>
         </TouchableOpacity>
       </View>
       <SocialButton
@@ -87,13 +93,22 @@ const styles = StyleSheet.create({
   navButton: {
     marginTop: 15,
   },
-  forgotButton: {
-    marginVertical: 35,
-  },
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
     color: '#2e64e5',
     fontFamily: 'Lato-Regular',
+  },
+  textPrivate: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginVertical: 35,
+    justifyContent: 'center',
+  },
+  color_textPrivate: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    fontFamily: 'Lato-Regular',
+    color: 'grey',
   },
 });

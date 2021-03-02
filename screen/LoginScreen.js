@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, Image, View} from 'react-native';
+import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
 import FormInput from '../components/FormInput';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Formbutton from '../components/FormButton';
 
-const LogInScreen = () => {
+const LogInScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -30,6 +31,22 @@ const LogInScreen = () => {
         iconType="lock"
         secureTextEntry={true}
       />
+      <Formbutton
+        buttonTitle="Sign In"
+        onPress={() => alert('sign in clicked!')}
+      />
+      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+        <Text style={styles.navButtonText}>Forgot Password?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.forgotButton}
+        onPress={() => {
+          navigation.navigate('Signup');
+        }}>
+        <Text style={styles.navButtonText}>
+          Don't have an account? Create Here
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

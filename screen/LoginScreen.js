@@ -1,5 +1,12 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, Image, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import FormInput from '../components/FormInput';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Formbutton from '../components/FormButton';
@@ -42,20 +49,24 @@ const LogInScreen = ({navigation}) => {
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
-      <SocialButton
-        buttonTitle="Sign in with Facebook"
-        btnType="facebook"
-        color="#4867aa"
-        backgroundColor="#e6eaf4"
-        onPress={() => {}}
-      />
-      <SocialButton
-        buttonTitle="Sign in with Google"
-        btnType="google"
-        color="#de4d41"
-        backgroundColor="#f5e7ea"
-        onPress={() => {}}
-      />
+      {Platform.OS === 'android' ? (
+        <View>
+          <SocialButton
+            buttonTitle="Sign in with Facebook"
+            btnType="facebook"
+            color="#4867aa"
+            backgroundColor="#e6eaf4"
+            onPress={() => {}}
+          />
+          <SocialButton
+            buttonTitle="Sign in with Google"
+            btnType="google"
+            color="#de4d41"
+            backgroundColor="#f5e7ea"
+            onPress={() => {}}
+          />
+        </View>
+      ) : null}
       <TouchableOpacity
         style={styles.forgotButton}
         onPress={() => {

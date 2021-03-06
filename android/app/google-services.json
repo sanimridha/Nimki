@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "389807251067-huuo5kgkll21h5quvhe2q27l7ms0ef65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nimki",
+            "certificate_hash": "3f6c5a0e532b997e61ea23455c788bcb173b67b3"
+          }
+        },
+        {
           "client_id": "389807251067-iultctdencrho81f1b9h2hj519dgrfrl.apps.googleusercontent.com",
           "client_type": 3
         }

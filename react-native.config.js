@@ -5,12 +5,12 @@ module.exports = {
   },
   dependencies: {
     '@react-native-google-signin/google-signin': {
-      plartforms: {
+      platforms: {
         ios: null,
       },
     },
     'react-native-fbsdk': {
-      plartforms: {
+      platforms: {
         ios: null,
       },
     },

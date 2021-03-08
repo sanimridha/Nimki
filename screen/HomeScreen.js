@@ -1,14 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
+import {Container} from '../styles/FeedStyles';
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>News Feed</Text>
-    </View>
+    <Container>
+      <Text>hey there!</Text>
+      {/* <btn>hey</btn> */}
+    </Container>
   );
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({});

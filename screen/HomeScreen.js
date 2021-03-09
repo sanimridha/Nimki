@@ -1,21 +1,8 @@
 import React from 'react';
-import {
-  Card,
-  Container,
-  UserInfo,
-  UserImg,
-  PostTime,
-  UserName,
-  UserInfoText,
-  PostText,
-  PostImg,
-  InteractionWrapper,
-  Interaction,
-  InteractionText,
-  Divider,
-} from '../styles/FeedStyles';
+import {Container} from '../styles/FeedStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import PostCard from '../components/PostCard';
 
 const Posts = [
   {
@@ -84,7 +71,12 @@ const HomeScreen = () => {
   return (
     <Container>
       {/* <View style={styles.container}> */}
-
+      <FlatList
+        data={Posts}
+        renderItem={({item}) => <PostCard item={item} />}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+      />
       {/* </View> */}
     </Container>
   );

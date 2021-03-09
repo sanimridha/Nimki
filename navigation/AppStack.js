@@ -9,7 +9,7 @@ import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/ChatScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import AddPostScreen from '../screen/AddPostScreen';
-import {View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -58,6 +58,21 @@ const FeedStack = ({navigation}) => (
         headerBackImage: () => (
           <View style={{marginLeft: 15}}>
             <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+          </View>
+        ),
+        headerRight: () => (
+          <View style={{marginRight: 15}}>
+            <TouchableOpacity>
+              <Text
+                style={{
+                  fontFamily: 'Lato-Regular',
+                  fontWeight: 'bold',
+                  fontSize: 17,
+                  color: '#2E63E5',
+                }}>
+                Post
+              </Text>
+            </TouchableOpacity>
           </View>
         ),
       }}

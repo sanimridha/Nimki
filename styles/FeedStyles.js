@@ -7,9 +7,9 @@ export const Container = styled.View`
   padding: 20px;
 `;
 export const Card = styled.View`
-  background-color: #f8f8f8;
+  background-color: #f2f2f2;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 10px;
 `;
 export const UserInfo = styled.View`

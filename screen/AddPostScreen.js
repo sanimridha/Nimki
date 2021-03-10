@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import {InputField, InputWrapper} from '../styles/AddPost';
 
 const AddPostScreen = () => {
+  const [image, setImage] = useState(null);
   const actions = [
     {
       text: 'Take Photo',
@@ -24,6 +26,31 @@ const AddPostScreen = () => {
       color: 'green',
     },
   ];
+  const takePhotoFromCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+    });
+  };
+  const choosePhotoFromLibrary = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+    });
+  };
+  const me = () => {
+    console.log('me');
+  };
+  const you = () => {
+    console.log('you');
+  };
+
   return (
     <View style={styles.container}>
       <InputWrapper>
@@ -36,7 +63,9 @@ const AddPostScreen = () => {
       <FloatingAction
         actions={actions}
         onPressItem={(name) => {
-          console.log(`selected button: ${name}`);
+          name == 'bt_takePhoto'
+            ? takePhotoFromCamera()
+            : choosePhotoFromLibrary();
         }}
         color="red"
       />

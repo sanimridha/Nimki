@@ -4,7 +4,7 @@ import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
 
-import {InputField, InputWrapper} from '../styles/AddPost';
+import {AddImage, InputField, InputWrapper} from '../styles/AddPost';
 
 const AddPostScreen = () => {
   const [image, setImage] = useState(null);
@@ -52,6 +52,7 @@ const AddPostScreen = () => {
   return (
     <View style={styles.container}>
       <InputWrapper>
+        {image != null ? <AddImage source={{uri: image}} /> : null}
         <InputField
           placeholder="What's on your mind?"
           multiline

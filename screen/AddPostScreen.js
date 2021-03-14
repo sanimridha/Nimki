@@ -4,7 +4,13 @@ import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
 
-import {AddImage, InputField, InputWrapper} from '../styles/AddPost';
+import {
+  AddImage,
+  InputField,
+  InputWrapper,
+  SubmitBtn,
+  SubmitBtnText,
+} from '../styles/AddPost';
 
 const AddPostScreen = () => {
   const [image, setImage] = useState(null);
@@ -58,6 +64,9 @@ const AddPostScreen = () => {
           multiline
           numberOfLines={4}
         />
+        <SubmitBtn>
+          <SubmitBtnText>Post</SubmitBtnText>
+        </SubmitBtn>
       </InputWrapper>
       <FloatingAction
         actions={actions}

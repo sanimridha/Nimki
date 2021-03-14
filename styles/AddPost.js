@@ -5,7 +5,7 @@ export const InputWrapper = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #2e64e515;
+  background-color: #ccffff;
 `;
 export const InputField = styled.TextInput`
   justify-content: center;

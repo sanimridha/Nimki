@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Alert, Platform, StyleSheet, Text, View} from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
 
 import {
   AddImage,
@@ -14,6 +15,8 @@ import {
 
 const AddPostScreen = () => {
   const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [transferrd, setTransferd] = useState(0);
   const actions = [
     {
       text: 'Take Photo',
@@ -54,6 +57,22 @@ const AddPostScreen = () => {
       setImage(imageUri);
     });
   };
+  const submitPost = async () => {
+    const uploadUri = image;
+    const fileName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+    setUploading(true);
+    try {
+      await storage().ref(fileName).putFile(uploadUri);
+      setUploading(false);
+      Alert.alert(
+        'Image uploaded!',
+        'Your Image has been uploaded to the Cloud Firebase Storage Successfully.',
+      );
+    } catch (e) {
+      console.log(e);
+    }
+    setImage(null);
+  };
 
   return (
     <View style={styles.container}>
@@ -64,7 +83,7 @@ const AddPostScreen = () => {
           multiline
           numberOfLines={4}
         />
-        <SubmitBtn>
+        <SubmitBtn onPress={submitPost}>
           <SubmitBtnText>Post</SubmitBtnText>
         </SubmitBtn>
       </InputWrapper>

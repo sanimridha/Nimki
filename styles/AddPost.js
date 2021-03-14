@@ -16,7 +16,7 @@ export const InputField = styled.TextInput`
 `;
 export const AddImage = styled.Image`
   width: 100%;
-  height: 250px;
+  height: 450px;
   margin-bottom: 15px;
 `;
 export const StatusWrapper = styled.View`

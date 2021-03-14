@@ -16,7 +16,7 @@ export const InputField = styled.TextInput`
 `;
 export const AddImage = styled.Image`
   width: 100%;
-  height: 450px;
+  height: 420px;
   margin-bottom: 15px;
 `;
 export const StatusWrapper = styled.View`
@@ -28,7 +28,7 @@ export const SubmitBtn = styled.TouchableOpacity`
   justify-content: center;
   background-color: #2e64e515;
   border-radius: 5px;
-  padding: 10px 25px;
+  padding: 7px 25px;
 `;
 export const SubmitBtnText = styled.Text`
   font-size: 18px;

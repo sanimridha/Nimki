@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {Alert, Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -9,6 +16,7 @@ import {
   AddImage,
   InputField,
   InputWrapper,
+  StatusWrapper,
   SubmitBtn,
   SubmitBtnText,
 } from '../styles/AddPost';
@@ -61,8 +69,20 @@ const AddPostScreen = () => {
     const uploadUri = image;
     const fileName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
     setUploading(true);
+    setTransferd(0);
+    const task = storage().ref(fileName).putFile(uploadUri);
+    task.on('state_changed', (taskSnapshot) => {
+      console.log(
+        `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+      );
+      setTransferd(
+        Math.round(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) *
+          100,
+      );
+    });
+
     try {
-      await storage().ref(fileName).putFile(uploadUri);
+      await task;
       setUploading(false);
       Alert.alert(
         'Image uploaded!',
@@ -83,9 +103,16 @@ const AddPostScreen = () => {
           multiline
           numberOfLines={4}
         />
-        <SubmitBtn onPress={submitPost}>
-          <SubmitBtnText>Post</SubmitBtnText>
-        </SubmitBtn>
+        {uploading ? (
+          <StatusWrapper>
+            <Text>{transferrd}% Completed</Text>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </StatusWrapper>
+        ) : (
+          <SubmitBtn onPress={submitPost}>
+            <SubmitBtnText>Post</SubmitBtnText>
+          </SubmitBtn>
+        )}
       </InputWrapper>
       <FloatingAction
         actions={actions}

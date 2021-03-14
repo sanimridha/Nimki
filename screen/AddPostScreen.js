@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -33,6 +33,8 @@ const AddPostScreen = () => {
       cropping: true,
     }).then((image) => {
       console.log(image);
+      const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
+      setImage(imageUri);
     });
   };
   const choosePhotoFromLibrary = () => {
@@ -42,13 +44,9 @@ const AddPostScreen = () => {
       cropping: true,
     }).then((image) => {
       console.log(image);
+      const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
+      setImage(imageUri);
     });
-  };
-  const me = () => {
-    console.log('me');
-  };
-  const you = () => {
-    console.log('you');
   };
 
   return (

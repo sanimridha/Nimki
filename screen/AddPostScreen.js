@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,6 +11,9 @@ import {FloatingAction} from 'react-native-floating-action';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+
+import {AuthContext} from '../navigation/AuthProvider';
 
 import {
   AddImage,
@@ -22,9 +25,13 @@ import {
 } from '../styles/AddPost';
 
 const AddPostScreen = () => {
+  const {user, logout} = useContext(AuthContext);
+
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [transferrd, setTransferd] = useState(0);
+  const [post, setPost] = useState(null);
+
   const actions = [
     {
       text: 'Take Photo',
@@ -67,7 +74,29 @@ const AddPostScreen = () => {
   };
   const submitPost = async () => {
     const imageUrl = await uploadImage();
-    console.log(imageUrl);
+    console.log('image Url: ', imageUrl);
+    console.log('Post: ', post);
+
+    firestore()
+      .collection('posts')
+      .add({
+        userId: user.uid,
+        post: post,
+        postImg: imageUrl,
+        postTime: firestore.Timestamp.fromDate(new Date()),
+        likes: null,
+        comments: null,
+      })
+      .then(() => {
+        console.log('Post Added!');
+        setPost(null);
+      })
+      .catch((error) => {
+        console.log(
+          'Something went wrong with added post to firestore.',
+          error,
+        );
+      });
   };
 
   const uploadImage = async () => {
@@ -99,14 +128,14 @@ const AddPostScreen = () => {
 
       setUploading(false);
       Alert.alert(
-        'Image uploaded!',
-        'Your Image has been uploaded to the Cloud Firebase Storage Successfully.',
+        'Post uploaded!',
+        'Your post has been published Successfully.',
       );
+      setImage(null);
       return url;
     } catch (e) {
       return null;
     }
-    setImage(null);
   };
 
   return (
@@ -117,6 +146,8 @@ const AddPostScreen = () => {
           placeholder="What's on your mind?"
           multiline
           numberOfLines={4}
+          value={post}
+          onChangeText={(context) => setPost(context)}
         />
         {uploading ? (
           <StatusWrapper>

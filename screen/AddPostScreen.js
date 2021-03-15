@@ -66,6 +66,11 @@ const AddPostScreen = () => {
     });
   };
   const submitPost = async () => {
+    const imageUrl = await uploadImage();
+    console.log(imageUrl);
+  };
+
+  const uploadImage = async () => {
     const uploadUri = image;
     let fileName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
 
@@ -75,7 +80,8 @@ const AddPostScreen = () => {
     fileName = name + Date.now() + '.' + extension;
     setUploading(true);
     setTransferd(0);
-    const task = storage().ref(fileName).putFile(uploadUri);
+    const storageRef = storage().ref(`photos/${fileName}`);
+    const task = storageRef.putFile(uploadUri);
     task.on('state_changed', (taskSnapshot) => {
       console.log(
         `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
@@ -88,13 +94,17 @@ const AddPostScreen = () => {
 
     try {
       await task;
+
+      const url = await storageRef.getDownloadURL();
+
       setUploading(false);
       Alert.alert(
         'Image uploaded!',
         'Your Image has been uploaded to the Cloud Firebase Storage Successfully.',
       );
+      return url;
     } catch (e) {
-      console.log(e);
+      return null;
     }
     setImage(null);
   };

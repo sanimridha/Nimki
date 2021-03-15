@@ -50,7 +50,7 @@ const FeedStack = ({navigation}) => (
         title: '',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#2e64e515',
+          backgroundColor: '#ccffff',
           shadowColor: '#2e64e515',
           elevation: 0,
         },
@@ -60,21 +60,21 @@ const FeedStack = ({navigation}) => (
             <Ionicons name="arrow-back" size={25} color="#2e64e5" />
           </View>
         ),
-        headerRight: () => (
-          <View style={{marginRight: 15}}>
-            <TouchableOpacity>
-              <Text
-                style={{
-                  fontFamily: 'Lato-Regular',
-                  fontWeight: 'bold',
-                  fontSize: 17,
-                  color: '#2E63E5',
-                }}>
-                Post
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ),
+        // headerRight: () => (
+        //   <View style={{marginRight: 15}}>
+        //     <TouchableOpacity>
+        //       <Text
+        //         style={{
+        //           fontFamily: 'Lato-Regular',
+        //           fontWeight: 'bold',
+        //           fontSize: 17,
+        //           color: '#2E63E5',
+        //         }}>
+        //         Post
+        //       </Text>
+        //     </TouchableOpacity>
+        //   </View>
+        // ),
       }}
     />
     <Stack.Screen

@@ -19,7 +19,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {TouchableOpacity, View} from 'react-native';
 import {AuthContext} from '../navigation/AuthProvider';
 
-const PostCard = ({item}) => {
+const PostCard = ({item, onDelete}) => {
   const {user, logout} = useContext(AuthContext);
 
   var likeIcon = item.liked ? 'heart' : 'heart-outline';
@@ -71,6 +71,9 @@ const PostCard = ({item}) => {
               style={{
                 alignItems: 'center',
                 paddingRight: 40,
+              }}
+              onPress={() => {
+                onDelete(item.id);
               }}>
               <MaterialCommunityIcons
                 name="delete-outline"

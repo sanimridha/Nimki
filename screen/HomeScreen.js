@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from '../styles/FeedStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {Alert, FlatList, StyleSheet, View} from 'react-native';
 import PostCard from '../components/PostCard';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
 // const Posts = [
 //   {
@@ -78,6 +79,7 @@ const HomeScreen = () => {
 
         await firestore()
           .collection('posts')
+          .orderBy('postTime', 'desc')
           .get()
           .then((querySnapshot) => {
             console.log('Total Post: ', querySnapshot.size);
@@ -111,20 +113,59 @@ const HomeScreen = () => {
         if (loading) {
           setLoading(false);
         }
-        console.log('post : ', posts);
+        // console.log('post : ', posts);
       } catch (e) {
         console.log(e);
       }
     };
     fetchPost();
   }, []);
+  const deletePost = (postId) => {
+    console.log('current post ID: ', postId);
+
+    firestore()
+      .collection('posts')
+      .doc(postId)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          const {postImg} = documentSnapshot.data();
+
+          if (postImg != null) {
+            //Firebase image deletion
+            const storageRef = storage().refFromURL(postImg);
+            const imageRef = storage().ref(storageRef.fullPath);
+
+            imageRef
+              .delete()
+              .then(() => {
+                console.log(`${postImg} has been deleted successfully`);
+                deleteFirestoreData(postId);
+              })
+              .catch((e) => {
+                console.log('Error while deleting the image ', e);
+              });
+          }
+        }
+      });
+  };
+  const deleteFirestoreData = (postId) => {
+    //delete firestore data
+    firestore()
+      .collection('posts')
+      .doc(postId)
+      .delete()
+      .then(() => {
+        Alert.alert('Post Deleted!', 'Your post has deleted successfully!');
+      });
+  };
 
   return (
     <Container>
       {/* <View style={styles.container}> */}
       <FlatList
         data={posts}
-        renderItem={({item}) => <PostCard item={item} />}
+        renderItem={({item}) => <PostCard item={item} onDelete={deletePost} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
       />

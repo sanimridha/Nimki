@@ -24,7 +24,7 @@ import {
   SubmitBtnText,
 } from '../styles/AddPost';
 
-const AddPostScreen = () => {
+const AddPostScreen = ({navigation}) => {
   const {user, logout} = useContext(AuthContext);
 
   const [image, setImage] = useState(null);

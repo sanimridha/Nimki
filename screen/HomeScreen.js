@@ -83,7 +83,7 @@ const HomeScreen = () => {
         .orderBy('postTime', 'desc')
         .get()
         .then((querySnapshot) => {
-          console.log('Total Post: ', querySnapshot.size);
+          // console.log('Total Post: ', querySnapshot.size);
 
           querySnapshot.forEach((doc) => {
             const {
@@ -127,6 +127,26 @@ const HomeScreen = () => {
     fetchPost();
     setDeleted(false);
   }, [deleted]);
+
+  const handleDelete = (postId) => {
+    Alert.alert(
+      'Delete post',
+      'Are you sure?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed!'),
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: () => deletePost(postId),
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
   const deletePost = (postId) => {
     console.log('current post ID: ', postId);
 
@@ -175,7 +195,9 @@ const HomeScreen = () => {
       {/* <View style={styles.container}> */}
       <FlatList
         data={posts}
-        renderItem={({item}) => <PostCard item={item} onDelete={deletePost} />}
+        renderItem={({item}) => (
+          <PostCard item={item} onDelete={handleDelete} />
+        )}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
       />

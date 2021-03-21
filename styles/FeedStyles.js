@@ -66,6 +66,7 @@ export const Interaction = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 5px;
   padding: 2px 5px;
+  padding-right: 20;
   background-color: ${(props) => (props.active ? '#2e64e515' : 'transparent')};
 `;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Card,
   Container,
@@ -15,8 +15,13 @@ import {
   Divider,
 } from '../styles/FeedStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {TouchableOpacity, View} from 'react-native';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const PostCard = ({item}) => {
+  const {user, logout} = useContext(AuthContext);
+
   var likeIcon = item.liked ? 'heart' : 'heart-outline';
   var likeIconColor = item.liked ? '#2e64e5' : '#333';
   var likeText, commentText;
@@ -59,6 +64,24 @@ const PostCard = ({item}) => {
           <Ionicons name="md-chatbubble-outline" size={24} color="black" />
           <InteractionText>{commentText}</InteractionText>
         </Interaction>
+        {user.uid == item.userId ? (
+          <View>
+            {/* <Interaction> */}
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                paddingRight: 40,
+              }}>
+              <MaterialCommunityIcons
+                name="delete-outline"
+                size={24}
+                color="black"
+              />
+              {/* <InteractionText>Delete</InteractionText> */}
+            </TouchableOpacity>
+            {/* </Interaction> */}
+          </View>
+        ) : null}
       </InteractionWrapper>
     </Card>
   );

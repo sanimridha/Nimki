@@ -72,54 +72,61 @@ import storage from '@react-native-firebase/storage';
 const HomeScreen = () => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const list = [];
+  const [deleted, setDeleted] = useState(false);
 
-        await firestore()
-          .collection('posts')
-          .orderBy('postTime', 'desc')
-          .get()
-          .then((querySnapshot) => {
-            console.log('Total Post: ', querySnapshot.size);
+  const fetchPost = async () => {
+    try {
+      const list = [];
 
-            querySnapshot.forEach((doc) => {
-              const {
-                userId,
-                post,
-                postImg,
-                postTime,
-                likes,
-                comments,
-              } = doc.data();
-              list.push({
-                id: doc.id,
-                userId,
-                userName: 'Test Name',
-                userImg:
-                  'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png',
-                postTime: postTime,
-                post,
-                postImg,
-                liked: false,
-                likes,
-                comments,
-              });
+      await firestore()
+        .collection('posts')
+        .orderBy('postTime', 'desc')
+        .get()
+        .then((querySnapshot) => {
+          console.log('Total Post: ', querySnapshot.size);
+
+          querySnapshot.forEach((doc) => {
+            const {
+              userId,
+              post,
+              postImg,
+              postTime,
+              likes,
+              comments,
+            } = doc.data();
+            list.push({
+              id: doc.id,
+              userId,
+              userName: 'Test Name',
+              userImg:
+                'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png',
+              postTime: postTime,
+              post,
+              postImg,
+              liked: false,
+              likes,
+              comments,
             });
           });
-        setPosts(list);
+        });
+      setPosts(list);
 
-        if (loading) {
-          setLoading(false);
-        }
-        // console.log('post : ', posts);
-      } catch (e) {
-        console.log(e);
+      if (loading) {
+        setLoading(false);
       }
-    };
+      // console.log('post : ', posts);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
     fetchPost();
-  }, []);
+  }, [posts]);
+
+  useEffect(() => {
+    fetchPost();
+    setDeleted(false);
+  }, [deleted]);
   const deletePost = (postId) => {
     console.log('current post ID: ', postId);
 
@@ -141,10 +148,13 @@ const HomeScreen = () => {
               .then(() => {
                 console.log(`${postImg} has been deleted successfully`);
                 deleteFirestoreData(postId);
+                setDeleted(true);
               })
               .catch((e) => {
                 console.log('Error while deleting the image ', e);
               });
+          } else {
+            deleteFirestoreData(postId);
           }
         }
       });

@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 export const Card = styled.View`
   background-color: #f2f2f2;
-  width: 100%;
+  width: 400px;
   margin-bottom: 10px;
   border-radius: 10px;
 `;

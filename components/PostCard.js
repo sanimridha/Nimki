@@ -19,6 +19,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {TouchableOpacity, View} from 'react-native';
 import {AuthContext} from '../navigation/AuthProvider';
 import moment from 'moment';
+import ProgressiveImage from './ProgressiveImage';
 
 const PostCard = ({item, onDelete}) => {
   const {user, logout} = useContext(AuthContext);
@@ -51,8 +52,23 @@ const PostCard = ({item, onDelete}) => {
         </UserInfoText>
       </UserInfo>
       <PostText>{item.post}</PostText>
+      {/* {item.postImg != null ? (
+        <ProgressiveImage
+          defaultImageSource={require('../assets/images/DefaultImage.png')}
+          source={{uri: item.postImg}}
+          style={{width: '100%', height: 250, marginTop: 15}}
+          resizeMode="cover"
+        />
+      ) : (
+        <Divider />
+      )} */}
       {item.postImg != null ? (
-        <PostImg source={{uri: item.postImg}} />
+        <ProgressiveImage
+          defaultImageSource={require('../assets/images/DefaultImage.png')}
+          source={{uri: item.postImg}}
+          style={{width: '100%', height: 250}}
+          resizeMode="cover"
+        />
       ) : (
         <Divider />
       )}

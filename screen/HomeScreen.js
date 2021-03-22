@@ -129,7 +129,7 @@ const HomeScreen = () => {
   };
   useEffect(() => {
     fetchPost();
-  }, [posts]);
+  }, []);
 
   useEffect(() => {
     fetchPost();

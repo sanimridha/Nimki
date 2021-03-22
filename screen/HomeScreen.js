@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from '../styles/FeedStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Alert, FlatList, StyleSheet, View} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  ScrollView,
+} from 'react-native';
 import PostCard from '../components/PostCard';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 // const Posts = [
 //   {
@@ -99,7 +107,7 @@ const HomeScreen = () => {
               userId,
               userName: 'Test Name',
               userImg:
-                'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png',
+                'https://avatars.githubusercontent.com/u/48827749?s=400&u=827f321639faeb741987a078b4172602eff460f7&v=4',
               postTime: postTime,
               post,
               postImg,
@@ -189,20 +197,90 @@ const HomeScreen = () => {
         Alert.alert('Post Deleted!', 'Your post has deleted successfully!');
       });
   };
+  const ListHeader = () => {
+    return null;
+  };
 
   return (
-    <Container>
-      {/* <View style={styles.container}> */}
-      <FlatList
-        data={posts}
-        renderItem={({item}) => (
-          <PostCard item={item} onDelete={handleDelete} />
-        )}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-      />
-      {/* </View> */}
-    </Container>
+    <>
+      {loading ? (
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{alignItems: 'center'}}>
+          <SkeletonPlaceholder>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{width: 60, height: 60, borderRadius: 50}} />
+              <View style={{marginLeft: 10}}>
+                <View style={{width: 120, height: 20, borderRadius: 4}} />
+                <View
+                  style={{marginTop: 6, width: 80, height: 20, borderRadius: 4}}
+                />
+              </View>
+            </View>
+            <View style={{marginTop: 10, marginBottom: 30}}>
+              <View style={{width: 300, height: 20, borderRadius: 4}}></View>
+              <View
+                style={{
+                  marginTop: 6,
+                  width: 250,
+                  height: 20,
+                  borderRadius: 4,
+                }}></View>
+              <View
+                style={{
+                  marginTop: 6,
+                  width: 350,
+                  height: 200,
+                  borderRadius: 4,
+                }}></View>
+            </View>
+          </SkeletonPlaceholder>
+          <SkeletonPlaceholder>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{width: 60, height: 60, borderRadius: 50}} />
+              <View style={{marginLeft: 10}}>
+                <View style={{width: 120, height: 20, borderRadius: 4}} />
+                <View
+                  style={{marginTop: 6, width: 80, height: 20, borderRadius: 4}}
+                />
+              </View>
+            </View>
+            <View style={{marginTop: 10, marginBottom: 30}}>
+              <View style={{width: 300, height: 20, borderRadius: 4}}></View>
+              <View
+                style={{
+                  marginTop: 6,
+                  width: 250,
+                  height: 20,
+                  borderRadius: 4,
+                }}></View>
+              <View
+                style={{
+                  marginTop: 6,
+                  width: 350,
+                  height: 200,
+                  borderRadius: 4,
+                }}></View>
+            </View>
+          </SkeletonPlaceholder>
+        </ScrollView>
+      ) : (
+        <Container>
+          {/* <View style={styles.container}> */}
+          <FlatList
+            data={posts}
+            renderItem={({item}) => (
+              <PostCard item={item} onDelete={handleDelete} />
+            )}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={ListHeader}
+            ListFooterComponent={ListHeader}
+          />
+          {/* </View> */}
+        </Container>
+      )}
+    </>
   );
 };
 

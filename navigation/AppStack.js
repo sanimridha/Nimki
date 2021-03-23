@@ -10,6 +10,7 @@ import ChatScreen from '../screen/ChatScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import AddPostScreen from '../screen/AddPostScreen';
 import {Text, TouchableOpacity, View} from 'react-native';
+import MessagesScreen from '../screen/MessagesScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,6 +99,19 @@ const FeedStack = ({navigation}) => (
     />
   </Stack.Navigator>
 );
+const MessageStack = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen name="Messages" component={MessagesScreen} />
+    <Stack.Screen
+      name="Chat"
+      component={ChatScreen}
+      options={({route}) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false,
+      })}
+    />
+  </Stack.Navigator>
+);
 
 const AppStack = () => {
   return (
@@ -122,7 +136,7 @@ const AppStack = () => {
       />
       <Tab.Screen
         name="Messages"
-        component={ChatScreen}
+        component={MessageStack}
         options={({color, size}) => {
           return {
             tabBarLabel: 'Messages',

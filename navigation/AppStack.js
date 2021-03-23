@@ -105,10 +105,10 @@ const MessageStack = ({navigation}) => (
     <Stack.Screen
       name="Chat"
       component={ChatScreen}
-      // options={({route}) => ({
-      //   title: route.params.userName,
-      //   headerBackTitleVisible: false,
-      // })}
+      options={({route}) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false,
+      })}
     />
   </Stack.Navigator>
 );
